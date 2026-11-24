@@ -65,5 +65,11 @@ last_of(_, _) :-
 % the cycle a -> b -> c -> a always offers one more edge. Carry the nodes
 % you visited. Refuse to step onto one again. \+ Goal is true when Goal
 % cannot be proved. That is how you say "not yet visited."
-route(_, _, _) :-
-    throw(not_implemented(route/3)).
+route(From, To, Path) :-
+    root_walk(From, To, [From], Path).
+
+root_walk(Node, Node, _, [Node]).
+root_walk(Current, To, Visited, [Current|Rest]) :-
+    edge(Current, Next),
+    \+ elem(Next, Visited),
+    root_walk(Next, To, [Next|Visited], Rest).
