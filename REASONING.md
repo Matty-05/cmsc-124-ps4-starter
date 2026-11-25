@@ -32,65 +32,65 @@ nothing and the search ends after one answer.
 
 ## P01
 
-Write one to three sentences here. Name the rule that fixes each field.
+Prolog tries the `parent/2` facts in source order. The only two facts with Tom as the parent bind `X` to `liz` first and `bob` on backtracking.
 
 ## P02
 
-Write one to three sentences here. Name the rule that fixes each field.
+The ground query matches `parent(tom,bob)` exactly, so it returns `true`. No other fact matches, so there is one answer.
 
 ## P03
 
-Write one to three sentences here. Name the rule that fixes each field.
+No `parent/2` fact has `tom` as its second argument. The query returns `false` and has zero solutions.
 
 ## P04
 
-Write one to three sentences here. Name the rule that fixes each field.
+Unification first binds `X` to `f(Y,a)`. The next goal binds the same `Y` to `b`, yielding `X=f(b,a),Y=b` as the only answer.
 
 ## P05
 
-Write one to three sentences here. Name the rule that fixes each field.
+Both terms have the functor `f/2`, so unification matches the arguments by position. This binds `X=a` and `Y=b` in one solution.
 
 ## P06
 
-Write one to three sentences here. Name the rule that fixes each field.
+The atoms `a` and `b` differ, so unification fails and the query has zero solutions.
 
 ## P07
 
-Write one to three sentences here. Name the rule that fixes each field.
+`grandparent/2` looks for a child of Tom and then a child of that person. Liz has no children in the facts, so Prolog backtracks to Bob and finds his two children, Ann and Pat, in that order.
 
 ## P08
 
-Write one to three sentences here. Name the rule that fixes each field.
+The base clause of `ancestor/2` gives Tom's direct children, Liz and Bob, first. The recursive clause finds Ann, Pat, Sue, and Jim through Bob, giving six answers in all.
 
 ## P09
 
-Write one to three sentences here. Name the rule that fixes each field.
+`ancestor_r/2` tries recursion before the direct-parent clause. The depth-first search reaches Sue through Ann and then Jim through Pat before giving the shallower answers, for six total.
 
 ## P10
 
-Write one to three sentences here. Name the rule that fixes each field.
+The base clause finds Jim's direct parent, Pat, first. The recursive clause tries Tom's parent facts before Bob's and finds the path from Tom through Bob and Pat to Jim, so Tom is second. Backtracking then returns Bob through Pat, giving three answers total.
 
 ## P11
 
-Write one to three sentences here. Name the rule that fixes each field.
+The first clause of `reach/2` calls itself before checking any edge. The search keeps descending without reaching the base clause, so both answer slots and the count read `unbounded`.
 
 ## P12
 
-Write one to three sentences here. Name the rule that fixes each field.
+`reach_r/2` follows edges before recursing and reaches `d` along `a -> b -> c -> d`. On backtracking it can go around `a -> b -> c -> a` any number of times before reaching `d` again, so the first two answers are `true` and the count is `unbounded`.
 
 ## P13
 
-Write one to three sentences here. Name the rule that fixes each field.
+`len/2` gives the empty list length zero and adds one as each recursive call returns. The three elements give the single answer `N=3`.
 
 ## P14
 
-Write one to three sentences here. Name the rule that fixes each field.
+The base clause of `join/3` gives the split `X=[],Y=[1,2]` first. Each recursive step adds one element to the prefix, giving `X=[1],Y=[2]` second and `X=[1,2],Y=[]` third.
 
 ## P15
 
-Write one to three sentences here. Name the rule that fixes each field.
+Prolog evaluates `X > 2` before `elem/2` can bind `X`. The comparison raises an instantiation error, so the runner records `error` in all three fields.
 
 ## P16
 
-Write one to three sentences here. Name the rule that fixes each field.
+`elem/2` binds `X` to each element before the comparison runs. Only `3` passes `X > 2`, so `X=3` is the sole answer.
 
