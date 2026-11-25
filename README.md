@@ -7,6 +7,7 @@ Problem Set 4. The assignment manual defines the work and the submission rules.
 ## Pair
 
 - John Matthew Fallarme (`@Matty-05`)
+- Rafahil D. Palompon (`@vertigodot`)
 
 ## Layout
 
