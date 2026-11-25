@@ -32,35 +32,35 @@ nothing and the search ends after one answer.
 
 ## P01
 
-Prolog tries the `parent/2` facts in source order. The only two facts with Tom as the parent bind `X` to `liz` first and `bob` on backtracking.
+'parent(tom, X)' here scans facts from from top to bottom. We see liz first then we see bob. Since there are no other children for tom, we get a count of 2.
 
 ## P02
 
-The ground query matches `parent(tom,bob)` exactly, so it returns `true`. No other fact matches, so there is one answer.
+Here we check if 'parent(tom, bob)' is true and since it is, there is no second so we get count 1.
 
 ## P03
 
-No `parent/2` fact has `tom` as its second argument. The query returns `false` and has zero solutions.
+'parent(X, tom)' here looks for a parent fact that has tom second. Since there is none found, it is false and we get count 0.
 
 ## P04
 
-Unification first binds `X` to `f(Y,a)`. The next goal binds the same `Y` to `b`, yielding `X=f(b,a),Y=b` as the only answer.
+Unification binds X to f(b,a) and then Y to b. Count is 1 since we get X=f(b,a),Y=b and no other answer.
 
 ## P05
 
-Both terms have the functor `f/2`, so unification matches the arguments by position. This binds `X=a` and `Y=b` in one solution.
+Here unification binds the terms positionally so X binds to a and Y binds to b. No second answer so count is 1.
 
 ## P06
 
-The atoms `a` and `b` differ, so unification fails and the query has zero solutions.
+Since a and b are distinct, they cannot unify. The query fails and we get false with 0 count.
 
 ## P07
 
-`grandparent/2` looks for a child of Tom and then a child of that person. Liz has no children in the facts, so Prolog backtracks to Bob and finds his two children, Ann and Pat, in that order.
+When looking at the 'grandparent(G,C)' rule, we first find P whose parent is G, then we look at those who have parent P. There are no parent rules with liz as first so nothing there. We find 2 children through bob so first is ann and second is pat. No other parent facts are true so count is 2.
 
 ## P08
 
-The base clause of `ancestor/2` gives Tom's direct children, Liz and Bob, first. The recursive clause finds Ann, Pat, Sue, and Jim through Bob, giving six answers in all.
+'ancestor' here has 2 clauses so we first get those whose parent is tom, then we go into the second clause where we go into bob's children's children which are ann and pat who also have a child each being jim and sue. We get a count of 6 total.
 
 ## P09
 
